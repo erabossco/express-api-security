@@ -15,7 +15,6 @@ required for a production-ready Express backend application.
 {
   "main": "/src/server.ts",
 
-  // Change type commonjs to module
   "type": "module",
 
   "dependencies": {
@@ -48,17 +47,75 @@ required for a production-ready Express backend application.
     "rootDir": "./src",
     "outDir": "./dist",
 
-    // Check these lines
     "module": "nodenext",
     "target": "esnext",
 
-    // insert these lines also if missing
     "moduleResolution": "nodenext",
     "esModuleInterop": true
   },
-  // our project rootDir is src
   "include": ["src"]
 }
 ```
 
 ## Features
+
+See `src/app.ts` for the complete security implementation.
+See `src/config/security/**` for security configurations.
+
+### Remove the "X-Powered-By" Header.
+
+This helps hide the fact that the app uses Express, improving security by reducing technology exposure.
+
+```js
+app.disable("x-powered-by");
+```
+
+### Helmet Security Middleware
+
+Helmet adds several HTTP security headers. It helps protect against:
+
+- XSS attacks
+- Clickjacking
+- MIME sniffing
+- Other common vulnerabilities
+
+See `src/config/security/helmet.config.ts`
+
+```js
+app.use(helmetConfig);
+```
+
+### CORS (Cross-Origin Resource Sharing) Security Middleware
+
+CORS is a security mechanism that allows requests from authorised frontend URLs or IP addresses to communicate with the backend while restricting access from unauthorised origins.
+
+See `src/config/security/cors.config.ts`
+
+```js
+app.use(corsConfig);
+```
+
+### Body Parsers Middleware
+
+This parses incoming JSON and URL-encoded request bodies while limiting payload size to help prevent large request abuse.
+
+```js
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+```
+
+### Express Rate Limit Security Middleware
+
+Express `rateLimit` protects the API from:
+
+- Brute-force attacks
+- Spam
+- API abuse
+- Credential stuffing
+- DDoS attack
+
+See `src/config/security/rate-limit.config.ts`
+
+```js
+app.use(rateLimitConfig);
+```
