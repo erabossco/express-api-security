@@ -1,8 +1,8 @@
-# Node.js & Express API Security
+# Node.js & Express API Security System
 
 ## Description
 
-This is an Express API security project built with Node.js and Express.js, and TypeScript.
+This is an Express API security system built with Node.js, Express.js, and TypeScript.
 
 This self-descriptive project explains how to configure and understand major security features
 required for a production-ready Express backend application.
