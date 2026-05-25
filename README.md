@@ -95,15 +95,6 @@ See `src/config/security/cors.config.ts`
 app.use(corsConfig);
 ```
 
-### Body Parsers Middleware
-
-This parses incoming JSON and URL-encoded request bodies while limiting payload size to help prevent large request abuse.
-
-```js
-app.use(express.json({ limit: "10kb" }));
-app.use(express.urlencoded({ extended: true, limit: "10kb" }));
-```
-
 ### Express Rate Limit Security Middleware
 
 Express `rateLimit` protects the API from:
@@ -119,3 +110,48 @@ See `src/config/security/rate-limit.config.ts`
 ```js
 app.use(rateLimitConfig);
 ```
+
+### Body Parsers Middleware
+
+This parses incoming JSON and URL-encoded request bodies while limiting payload size to help prevent large request abuse.
+
+```js
+app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+```
+
+## Summary
+
+Maintain the following middleware sequence to ensure proper security, request handling, and application behavior.
+
+```js
+import express from "express";
+import type {Request, Response} from "express";
+import helmetConfig from "./config/security/helmet.config.js";
+import corsConfig from "./config/security/cors.config.js";
+import rateLimitConfig from "./config/security/rate-limit.config.js";
+
+
+const app = express();
+app.set("trust proxy", 1);
+app.disable("x-powered-by");
+
+app.use(helmetConfig);
+app.use(corsConfig);
+app.use(rateLimitConfig);
+
+app.use(express.json({limit: "10kb"}));
+app.use(express.urlencoded({extended:true, limit: "10kb"}));
+```
+
+---
+
+## Author
+
+**Mamun Hossain**
+Backend Engineer
+
+Building scalable, high-performance, and secure API systems with Node.js and TypeScript.
+
+- [GitHub] (https://github.com/erabossco)
+- [LinkedIn] (https://linkedin.com/in/eraboss)
