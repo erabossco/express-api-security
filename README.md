@@ -149,9 +149,10 @@ app.use(express.urlencoded({extended:true, limit: "10kb"}));
 ## Author
 
 **Mamun Hossain**
+
 Backend Engineer
 
 Building scalable, high-performance, and secure API systems with Node.js and TypeScript.
 
-- [GitHub] (https://github.com/erabossco)
-- [LinkedIn] (https://linkedin.com/in/eraboss)
+- [GitHub](https://github.com/erabossco)
+- [LinkedIn](https://linkedin.com/in/eraboss)
