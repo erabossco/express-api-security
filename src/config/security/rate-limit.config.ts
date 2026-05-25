@@ -34,7 +34,7 @@ const rateLimitConfig = rateLimit({
 });
 
 /** 
- * Export reuseable middle 
+ * Export reuseable rateLimit configuration
  * Uses: 
  * app.use(rateLimitConfig);
  */
